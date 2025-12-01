@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Black Screen</title>
+<style>
+html, body {
+height: 100%;
+margin: 0;
+padding: 0;
+}
+body {
+background: #000;
+}
+</style>
+</head>
+<body>
+
+
+<script>
+// Attempt to keep the screen awake using the Wake Lock API
+let wakeLock = null;
+async function requestWakeLock() {
+try {
+wakeLock = await navigator.wakeLock.request('screen');
+wakeLock.addEventListener('release', () => {
+console.log('Screen Wake Lock released');
+});
+} catch (err) {
+console.error(`${err.name}, ${err.message}`);
+}
+}
+requestWakeLock();
+</script>
+
+
+</body>
+</html>
